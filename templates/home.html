@@ -1,0 +1,105 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section id="hero">
+    <div class="container">
+        {% if session.get('user') %}
+            <h1>Welcome,  <strong>{{ session['user']['username'] }} </strong></h1>
+            <h1>AI Business Services</h1>
+        {% else %}
+            <h1>Welcome to AI Business Services</h1>
+        {% endif %}
+        <p>Unlock the potential of AI for your business.</p>
+    </div>
+</section>
+
+<section id="companies">
+  <div class="container">
+      <h2>Provided Solutions To These Companies!</h2>
+      <div class="carousel-container">
+          <button class="carousel-button prev" onclick="scrollCarousel(-1)">
+              <i class="fas fa-chevron-left  fa-3x"></i>
+          </button>
+          <div class="carousel">
+              {% for company in companies %}
+              <div class="card">
+                  <img src="{{ company.image }}" alt="{{ company.company }}">
+                  <h3>{{ company.company }}</h3>
+                  <p>{{ company.description }}</p>
+                  <a href="#" class="btn">Contact Us</a>
+              </div>
+              {% endfor %}
+          </div>
+          <button class="carousel-button next" onclick="scrollCarousel(1)">
+              <i class="fas fa-chevron-right  fa-3x"></i>
+          </button>
+      </div>
+  </div>
+</section>
+
+<section id="gallery">
+    <h2>Gallery</h2>
+    <div class="slideshow-container">
+
+        <!-- Full-width images with number and caption text -->
+        <div class="mySlides fade">
+          <div class="numbertext">Artificial Intelligence</div>
+          <img src="{{ url_for('static', filename='images/temp.jpg') }}" style="width:100%">
+          <div class="text">Emerging AI Technologies</div>
+        </div>
+      
+        <div class="mySlides fade">
+          <div class="numbertext">Data Collection</div>
+          <img src="{{ url_for('static', filename='images/temp2.jpg') }}" style="width:100%">
+          <div class="text">Getting a Collection Of Data</div>
+        </div>
+      
+        <div class="mySlides fade">
+          <div class="numbertext">Data Analytics</div>
+          <img src="{{ url_for('static', filename='images/company-1.jpg') }}" style="width:100%">
+          <div class="text">Anaylytics Of Your Company Data</div>
+        </div>
+
+      </div>
+      <br>
+      
+      <!-- The dots/circles -->
+      <div style="text-align:center">
+        <span class="dot" onclick="currentSlide(1)"></span>
+        <span class="dot" onclick="currentSlide(2)"></span>
+        <span class="dot" onclick="currentSlide(3)"></span>
+      </div>
+</section>
+
+
+<section id="about">
+    <div class="container">
+      <div class="about-header">
+        <h2>About Us</h2>
+        <p>Welcome to AI Business Services, the leading provider of cutting-edge AI solutions for businesses. Our mission is to empower organizations to unlock the full potential of artificial intelligence, driving growth, enhancing operational efficiency, and revolutionizing customer experiences.</p>
+      </div>
+      <div class="about-content">
+        <div class="about-card">
+          <img src="{{ url_for('static', filename='images/temp.jpg') }}" alt="About Image">
+          <h3>Our Expert Team</h3>
+          <p>At AI Business Services, we have a dedicated team of AI professionals who combine their expertise with state-of-the-art technologies to deliver innovative solutions tailored to the unique needs of our clients.</p>
+        </div>
+        <div class="about-card">
+          <img src="{{ url_for('static', filename='images/temp2.jpg') }}" alt="About Image">
+          <h3>Driven by Innovation</h3>
+          <p>We are committed to driving innovation in the AI industry. By staying at the forefront of advancements, we ensure that our clients have access to the latest technologies and best practices for achieving their business goals.</p>
+        </div>
+        <div class="about-card">
+          <img src="{{ url_for('static', filename='images/temp.jpg') }}" alt="About Image">
+          <h3>Collaborative Approach</h3>
+          <p>We believe in the power of collaboration. Our team works closely with clients to understand their unique challenges and goals, enabling us to provide customized AI strategies that deliver tangible results.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+
+
+{% endblock %}

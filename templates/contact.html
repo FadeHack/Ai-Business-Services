@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section id="contact">
+  <div class="contact-container">
+    <div class="contact-header">
+      <h2>Contact Us</h2>
+      <p>We would love to hear from you. Reach out to us for any inquiries or to discuss your AI needs.</p>
+    </div>
+    <div class="contact-form">
+      <form id="contact-form" action="/contact" method="POST">
+        <div class="form-field">
+          <i class="fas fa-user"></i>
+          <input type="text" name="name" placeholder="Your Name">
+        </div>
+        <div class="form-field">
+          <i class="fas fa-envelope"></i>
+          <input type="email" name="email" placeholder="Your Email">
+        </div>
+        <div class="form-field">
+          <i class="fas fa-pencil-alt"></i>
+          <textarea name="message" placeholder="Your Message"></textarea>
+        </div>
+        <button type="submit">Send Message</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.getElementById("contact-form").addEventListener("submit", function(event) {
+    event.preventDefault();
+    submitForm();
+  });
+
+  function submitForm() {
+    var form = document.getElementById("contact-form");
+    var formData = new FormData(form);
+
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", form.action);
+    xhr.onreadystatechange = function() {
+      if (xhr.readyState === XMLHttpRequest.DONE) {
+        if (xhr.status === 200) {
+          showCustomAlert("success", "Message sent successfully");
+        } else {
+          showCustomAlert("error", "Message failed to send");
+        }
+      }
+    };
+    xhr.send(formData);
+  }
+
+  function showCustomAlert(type, message) {
+    var alertBox = document.createElement("div");
+    alertBox.classList.add("custom-alert", type);
+    alertBox.innerHTML = message;
+  
+    document.body.appendChild(alertBox);
+  
+    setTimeout(function() {
+      alertBox.remove();
+      window.location.href = "/";
+    }, 3000);
+  }
+</script>
+{% endblock %}

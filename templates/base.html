@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Business Services</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='images/logo.png') }}" type="image/x-icon">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+</head>
+<body>
+    <nav>
+        <img src="../static/images/logo.png" alt="logo" id="logo">
+        {% if 'user' in session %}
+          <span id="username">  <i class="fas fa-user"></i> <strong>{{ session['user']['username'] }} </strong></span>
+        {% endif %}
+        <ul id="nav-menu">
+            <li><a href="{{ url_for('home') }}"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="{{ url_for('services') }}"><i class="fas fa-cogs"></i> Services</a></li>
+            <li><a href="{{ url_for('about') }}"><i class="fas fa-info-circle"></i> About</a></li>
+            <li><a href="{{ url_for('contact') }}"><i class="fas fa-envelope"></i> Contact</a></li>
+            {% if 'user' in session %}
+            <li class="logIn"><a href="{{ url_for('logout') }}"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+            {% else %}
+            <li class="logIn"><a href="{{ url_for('login') }}"><i class="fas fa-sign-in-alt"></i> Login</a></li>
+            {% endif %}
+        </ul>
+        <div id="nav-toggle">
+            <i class="fas fa-bars"></i>
+        </div>
+    </nav>
+
+    {% block content %}
+    {% endblock %}
+
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-links">
+                <ul>
+                    <li><a href="{{ url_for('home') }}">Home</a></li>
+                    <li><a href="{{ url_for('services') }}">Services</a></li>
+                    <li><a href="{{ url_for('about') }}">About</a></li>
+                    <li><a href="{{ url_for('contact') }}">Contact</a></li>
+                </ul>
+            </div>
+            <div class="social-icons">
+                <ul>
+                    <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                    <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                    <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+                    <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
+                </ul>
+            </div>
+            <div class="copy-right">
+                <p>&copy; 2023 AI Business Services. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

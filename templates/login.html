@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section id="login-register">
+  <div class="container">
+    <div class="login-register-header">
+      <h2>Welcome Back!</h2>
+      <p>Log in to your account or create a new one to get started.</p>
+    </div>
+    <div class="login-register-forms">
+      <div class="login-form" id="lf">
+        <h3>Login</h3>
+        {% if message %}
+        <div class="alert" id="login-alert">{{ message }}</div>
+        <script>
+          setTimeout(function() {
+            document.getElementById("login-alert").style.display = "none";
+          }, 5000);
+        </script>
+        {% endif %}
+        <form action="/login" method="POST">
+          <input type="email" placeholder="Email" name="email" required>
+          <input type="password" placeholder="Password" name="password" required>
+          <button type="submit">Log In</button>
+        </form>
+        <p>Don't have an account? <a href="#" id="toRegister">Register here</a>.</p>
+      </div>
+      <div class="register-form" id="rf" style="display: none;">
+        <h3>Register</h3>
+        {% if message %}
+        <div class="alert" id="register-alert">{{ message }}</div>
+        <script>
+          setTimeout(function() {
+            document.getElementById("register-alert").style.display = "none";
+          }, 5000);
+        </script>
+        {% endif %}
+        <form action="/register" method="POST">
+          <input type="text" placeholder="Username" name="username" required>
+          <input type="email" placeholder="Email" name="email" required>
+          <input type="password" placeholder="Password" name="password" required>
+          <button type="submit">Register</button>
+        </form>
+        <p>Already have an account? <a href="#" id="toLogin">Log in here</a>.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<script>
+  const loginForm = document.getElementById("lf")
+  const registerForm = document.getElementById("rf")
+  const toRegisterLink = document.getElementById("toRegister");
+  const toLoginLink = document.getElementById("toLogin");
+
+  toRegisterLink.addEventListener("click", function(e) {
+    e.preventDefault();
+    loginForm.style.display = "none";
+    registerForm.style.display = "block";
+  });
+
+  toLoginLink.addEventListener("click", function(e) {
+    e.preventDefault();
+    loginForm.style.display = "block";
+    registerForm.style.display = "none";
+  });
+</script>
+{% endblock %}

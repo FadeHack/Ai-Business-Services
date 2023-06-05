@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section id="services">
+    <div class="service-container">
+        <h2>AI Services</h2>
+        <p>Choose a service as per your requirement:</p>
+        <div class="filter-container">
+            <input type="text" id="service-filter" placeholder="Enter Keywords to Filter services...">
+            <button id="filter-button" class="btn">Filter</button>
+        </div>
+        <div class="service-cards">
+            {% for service in services %}
+            <div class="service-card-item">
+                <img src="{{ service.image }}" alt="{{ service.title }}">
+                <div class="card-content">
+                    <h3>{{ service.title }}</h3>
+                    <p>{{ service.description }}</p>
+                    <a href="#" class="btn">Get Now</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<script>
+    const filterInput = document.getElementById('service-filter');
+    const filterButton = document.getElementById('filter-button');
+    const serviceCards = document.querySelectorAll('.service-card-item');
+
+    filterButton.addEventListener('click', function () {
+        const filterValue = filterInput.value.toLowerCase();
+
+        serviceCards.forEach(function (card) {
+            const serviceTitle = card.querySelector('h3').textContent.toLowerCase();
+            const serviceDescription = card.querySelector('p').textContent.toLowerCase();
+
+            if (serviceTitle.includes(filterValue) || serviceDescription.includes(filterValue)) {
+                card.style.display = 'block';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    });
+</script>
+{% endblock %}
