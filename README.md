@@ -1,6 +1,4 @@
-# Project Name
-
-Project Name: AI Business Solutions
+## AI Business Solutions
 
 ## Description
 
